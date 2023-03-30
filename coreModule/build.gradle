@@ -1,5 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+
 }
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-kapt'
@@ -46,4 +48,18 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.24"
     kapt "com.google.dagger:dagger-android-processor:2.24"
     kapt 'com.google.dagger:dagger-compiler:2.24'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.RoaBsharat'
+                artifactId = 'core-test-module'
+                version = '1.0'
+            }
+        }
+    }
 }
